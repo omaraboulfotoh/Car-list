@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Car List</string>
+    <string name="error_occured">Error occurred</string>
+    <string name="error_connection">Connection Error</string>
+    <string name="cars_machines"><![CDATA[Cars & Machinery]]></string>
+    <string name="grid_view">Grid view</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="scroll_to_refresh">Scroll down to Search</string>
+    <string name="lot">Lot #</string>
+    <string name="time_left">Time Left</string>
+    <string name="bids">Bids</string>
+    <string name="year">Year of item</string>
+    <string name="price">Price</string>
+    <string name="end_date">End date</string>
+</resources>
