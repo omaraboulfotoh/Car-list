@@ -11,10 +11,14 @@ import com.omar.carlist.ParentRecyclerAdapter;
 import com.omar.carlist.ParentRecyclerViewHolder;
 import com.omar.carlist.R;
 import com.omar.carlist.app.data.models.Car;
+import com.omar.carlist.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -57,7 +61,15 @@ public class CarListAdapter extends ParentRecyclerAdapter<Car> {
             viewHolder.tvCarPrice.setText(String.valueOf(car.getAuctionInfo().getCurrentPrice()));
             viewHolder.tvCarPriceCurrency.setText(car.getAuctionInfo().getCurrency(local));
             viewHolder.tvLotNumber.setText(String.valueOf(car.getAuctionInfo().getLot()));
-            viewHolder.tvTimeLeft.setText("00:44:33");
+            NumberFormat nf = NumberFormat.getInstance(new Locale(local));
+            nf.setGroupingUsed(false);
+            int hours = GeneralUtils.splitToComponentTimes(car.getAuctionInfo().getEndDate())[0];
+            int mins = GeneralUtils.splitToComponentTimes(car.getAuctionInfo().getEndDate())[1];
+            int sec = GeneralUtils.splitToComponentTimes(car.getAuctionInfo().getEndDate())[2];
+            viewHolder.tvTimeLeft.setText(nf.format(hours) + ":" + nf.format(mins) + ":" + nf.format(sec));
+            if (hours < 1 && mins <= 5) {
+                viewHolder.tvTimeLeft.setTextColor(viewHolder.colorRed);
+            }
         }
     }
 
@@ -85,6 +97,9 @@ public class CarListAdapter extends ParentRecyclerAdapter<Car> {
         TextView tvBids;
         @BindView(R.id.tv_time_left)
         TextView tvTimeLeft;
+
+        @BindColor(R.color.colorRed)
+        int colorRed;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 
-
 public class GeneralUtils {
 
     public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
@@ -14,5 +13,17 @@ public class GeneralUtils {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(frameId, fragment);
         transaction.commit();
+    }
+
+    public static int[] splitToComponentTimes(long biggy) {
+
+        int hours = (int) biggy / 3600;
+        int remainder = (int) biggy - hours * 3600;
+        int mins = remainder / 60;
+        remainder = remainder - mins * 60;
+        int secs = remainder;
+
+        int[] ints = {hours, mins, secs};
+        return ints;
     }
 }

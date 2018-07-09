@@ -1,9 +1,11 @@
 package com.omar.carlist.carlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -49,6 +51,7 @@ public class CarListFragment extends ParentFragment implements CarlistContract.V
     private int sortType = Constants.NORMLA_SORT;
     private boolean isLoading = false;
     private boolean isLastPage = false;
+    private LocaleHelper localeHelper;
 
     @Inject
     public CarListFragment() {
@@ -67,12 +70,15 @@ public class CarListFragment extends ParentFragment implements CarlistContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_car_list, container, false);
         unbinder = ButterKnife.bind(this, view);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        createOptionsMenu(R.menu.menu_home);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        localeHelper = LocaleHelper.getInstance(getContext());
         mPresenter.registerView(this);
         mPresenter.start();
     }
@@ -197,5 +203,16 @@ public class CarListFragment extends ParentFragment implements CarlistContract.V
             swipeRefresh.setRefreshing(false);
         else
             adapter.removeFooterProgress();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.change_lang) {
+            localeHelper.setLanguage(localeHelper.getLanguage().equals(LocaleHelper.LANGUAGE_ARABIC)
+                    ? LocaleHelper.LANGUAGE_ENGLISH : LocaleHelper.LANGUAGE_ARABIC);
+            startActivity(new Intent(getContext(), CarListActivity.class));
+            getActivity().finishAffinity();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

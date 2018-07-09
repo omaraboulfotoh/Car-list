@@ -83,6 +83,19 @@ public class ParentFragment extends DaggerFragment implements ParentView {
         snack.show();
     }
 
+    protected void createOptionsMenu(int menuId) {
+        this.menuId = menuId;
+        getActivity().invalidateOptionsMenu();
+    }
+
+    /**
+     * function is used to create a menu
+     */
+    protected void removeOptionsMenu() {
+        menuId = 0;
+        getActivity().invalidateOptionsMenu();
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

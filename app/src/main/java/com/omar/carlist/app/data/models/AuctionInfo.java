@@ -11,7 +11,7 @@ public class AuctionInfo {
     private int bids;
     @SerializedName("endDate")
     @Expose
-    private int endDate;
+    private Long endDate;
     @SerializedName("endDateEn")
     @Expose
     private String endDateEn;
@@ -56,14 +56,13 @@ public class AuctionInfo {
         return bids;
     }
 
-    public Integer getEndDate() {
+    public Long getEndDate() {
         return endDate;
     }
 
     public String getEndDateString(String local) {
         return local.equals(LocaleHelper.LANGUAGE_ARABIC) ? endDateAr : endDateEn;
     }
-
 
     public String getCurrency(String local) {
         return local.equals(LocaleHelper.LANGUAGE_ARABIC) ? currencyAr : currencyEn;

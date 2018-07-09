@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Car List</string>
+    <string name="error_occured">حدث خطأ</string>
+    <string name="error_connection">مشكله فى الاتصال بالشبكة</string>
+    <string name="cars_machines"><![CDATA[Cars & Machinery]]></string>
+    <string name="grid_view">عرض الشبكة</string>
+    <string name="filter">فلتر</string>
+    <string name="sort">ترتيب</string>
+    <string name="scroll_to_refresh">انتقل لأسفل إلى البحث</string>
+    <string name="lot">Lot #</string>
+    <string name="time_left">الوقت المتبقي</string>
+    <string name="bids">العروض</string>
+    <string name="year">السنة</string>
+    <string name="price">السعر</string>
+    <string name="end_date">تاريخ الانتهاء</string>
+    <string name="change_lang">غير اللغة</string>
+</resources>

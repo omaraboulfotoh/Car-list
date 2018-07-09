@@ -13,4 +13,5 @@
     <string name="year">Year of item</string>
     <string name="price">Price</string>
     <string name="end_date">End date</string>
+    <string name="change_lang">Change language</string>
 </resources>
