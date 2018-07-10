@@ -1,6 +1,5 @@
 package com.omar.carlist.carlist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,7 +50,7 @@ public class CarListFragment extends ParentFragment implements CarlistContract.V
     private int sortType = Constants.NORMLA_SORT;
     private boolean isLoading = false;
     private boolean isLastPage = false;
-    private LocaleHelper localeHelper;
+
 
     @Inject
     public CarListFragment() {
@@ -71,14 +70,13 @@ public class CarListFragment extends ParentFragment implements CarlistContract.V
         View view = inflater.inflate(R.layout.fragment_car_list, container, false);
         unbinder = ButterKnife.bind(this, view);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        createOptionsMenu(R.menu.menu_home);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        localeHelper = LocaleHelper.getInstance(getContext());
+
         mPresenter.registerView(this);
         mPresenter.start();
     }
@@ -191,28 +189,28 @@ public class CarListFragment extends ParentFragment implements CarlistContract.V
 
     @Override
     public void showProgress() {
-        if (page == 0)
-            swipeRefresh.setRefreshing(true);
-        else
-            adapter.addFooterProgress();
+        if (page == 0) {
+            if (swipeRefresh != null)
+                swipeRefresh.setRefreshing(true);
+        } else {
+            if (adapter != null)
+                adapter.addFooterProgress();
+        }
     }
 
     @Override
     public void hideProgress() {
-        if (page == 0)
-            swipeRefresh.setRefreshing(false);
-        else
-            adapter.removeFooterProgress();
+        if (page == 0) {
+            if (swipeRefresh != null)
+                swipeRefresh.setRefreshing(false);
+        } else {
+            if (adapter != null)
+                adapter.removeFooterProgress();
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.change_lang) {
-            localeHelper.setLanguage(localeHelper.getLanguage().equals(LocaleHelper.LANGUAGE_ARABIC)
-                    ? LocaleHelper.LANGUAGE_ENGLISH : LocaleHelper.LANGUAGE_ARABIC);
-            startActivity(new Intent(getContext(), CarListActivity.class));
-            getActivity().finishAffinity();
-        }
-        return super.onOptionsItemSelected(item);
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

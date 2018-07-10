@@ -49,7 +49,7 @@ public class CarListPresenter implements CarlistContract.Presenter {
     public void getCarList(final int page, final int sortType) {
         mView.showProgress();
         if (page == 0)
-            RestClient.getClient().getCarList(ticks).subscribeOn(Schedulers.io())
+            RestClient.getClient().getCarList().subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<Response<CarListResponse>>() {
                         @Override

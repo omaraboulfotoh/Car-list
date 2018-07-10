@@ -2,8 +2,6 @@ package com.omar.carlist;
 
 import android.app.Activity;
 import android.support.design.widget.Snackbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
@@ -83,27 +81,7 @@ public class ParentFragment extends DaggerFragment implements ParentView {
         snack.show();
     }
 
-    protected void createOptionsMenu(int menuId) {
-        this.menuId = menuId;
-        getActivity().invalidateOptionsMenu();
-    }
 
-    /**
-     * function is used to create a menu
-     */
-    protected void removeOptionsMenu() {
-        menuId = 0;
-        getActivity().invalidateOptionsMenu();
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (menuId != 0) {
-            getActivity().getMenuInflater().inflate(menuId, menu);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
 
 }
